@@ -253,7 +253,7 @@ files for one “acquisition”. This is vendor software version dependent.
     List-mode data as exported from the scanner console
 
   - AC/\
-    CTAC (in HU) or MRAC (in DICOM)
+    attenuation CT or attenuation MR dicom series
 
   - vendor_recon/\
     Images reconstructed with vendor software (DICOM) (all corrections
