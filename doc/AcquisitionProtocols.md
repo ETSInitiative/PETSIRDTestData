@@ -10,7 +10,14 @@ the [ETSI Consortium](https://etsinitiative.org/etsi-consortium/)
 
 This document describes protocols for acquiring and processing of
 phantom data that can be used to test if PET list-mode (and associated
-calibration) data has been converted correctly to PETSIRD.
+calibration) convertors to PETSIRD are correct. This data is *not*
+intended for
+
+- QA/QC of your scanner. We therefore need only 1 data-set per
+   scanner model/software version.
+
+- checking your reconstruction chain. Tests avoid reconstruction
+  as much as possible.
 
 The current description is intended to be helpful but not a SOP. Our
 intention is to prioritise ease of gathering data and experience,
@@ -26,7 +33,7 @@ Notes:
   relaxed later).
 
 - All data should include list-mode data, calibration/normalisation
-  files, PET vendor reconstructions and CT (or MR). Raw data should be
+  files, PET vendor reconstructions and CT (or MR) images. Raw data should be
   in vendor format. All images should be in DICOM format. See the last
   section for directory structure, upload details etc.
 
@@ -74,20 +81,20 @@ Notes:
 
 #### Notes:
 
+- Given locations are approximate. There is no need to be accurate in positioning.
+
 - 1 source per acquisition
 
   - Avoids issues with randoms, background, debugging
 
   - Makes it easier to check activity
 
-- Locations are approximate
-
-- A CT (or MR) is needed for every point source position (a single CT/MR
-  covering all PET bed positions is fine) as this is used for
-  verification of location.
+- For each point source, use either one acquisition with multiple bed positions
+  or several independent acquisitions. In the former case,
+  a CT (or MR) covering all PET bed positions is fine.
 
 - Na-22 point source or Capillary tube with “bead” of activity are both
-  acceptable
+  acceptable.
 
 - Avoid issues with scatter and attenuation, so “holder” should be
   minimal.
@@ -246,7 +253,7 @@ files for one “acquisition”. This is vendor software version dependent.
     List-mode data as exported from the scanner console
 
   - AC/\
-    CTAC or MRAC (in DICOM)
+    CTAC (in HU) or MRAC (in DICOM)
 
   - vendor_recon/\
     Images reconstructed with vendor software (DICOM) (all corrections
@@ -273,11 +280,11 @@ are not familiar with Zenodo uploading, it is useful to try the sandpit
 site before creating a permanent public record.
 
 > [!TIP]
-> [Zenodo sandpit server](https://sandbox.zenodo.org/). If you wish to
->  login to the Zenodo sandpit site using Orcid credentials, we recommend
->  first logging in to the main [Zenodo](https://zenodo.org/) site and
+> If you wish to login to the [Zenodo sandpit server](https://sandbox.zenodo.org/)
+> using Orcid credentials, we recommend
+> first logging in to the main [Zenodo](https://zenodo.org/) site and
 > then going to the Zenodo sandpit site, otherwise the system can get
->  confused and try to validate you using an Orcid sandpit.
+> confused and try to validate you using an Orcid sandpit.
 
 For more information, see the [Zenodo upload
 instructions](https://help.zenodo.org/docs/deposit/create-new-upload/).
