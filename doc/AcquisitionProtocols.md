@@ -13,11 +13,11 @@ phantom data that can be used to test if PET list-mode (and associated
 calibration) convertors to PETSIRD are correct. This data is *not*
 intended for
 
-- QA/QC of your scanner. We therefore need only 1 data-set per
-   scanner model/software version.
+- QA/QC of your scanner (we need only 1 data-set per
+  scanner model/software version).
 
-- checking your reconstruction chain. Tests avoid reconstruction
-  as much as possible.
+- checking your reconstruction chain (tests avoid reconstruction
+  as much as possible).
 
 The current description is intended to be helpful but not a SOP. Our
 intention is to prioritise ease of gathering data and experience,
@@ -280,9 +280,9 @@ are not familiar with Zenodo uploading, it is useful to try the sandpit
 site before creating a permanent public record.
 
 > [!TIP]
-> If you wish to login to the [Zenodo sandpit server](https://sandbox.zenodo.org/)
+> If you wish to login to the [Zenodo sandbox site](https://sandbox.zenodo.org)
 > using Orcid credentials, we recommend
-> first logging in to the main [Zenodo](https://zenodo.org/) site and
+> first logging in to the [main Zenodo site](https://zenodo.org) and
 > then going to the Zenodo sandpit site, otherwise the system can get
 > confused and try to validate you using an Orcid sandpit.
 
