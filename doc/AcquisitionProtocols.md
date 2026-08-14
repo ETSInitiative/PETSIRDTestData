@@ -138,9 +138,16 @@ Notes:
 #### Acquisition(s):
 
 - Cylinder roughly in center of scanner with high-activity decaying over
-  several half-lives
+  several half-lives. A cylindrical fillable phantom provided by the
+  scanner vendor can be used. If such a phantom is not available, then
+  it is recommended any phantom with a uniformly filled cylindrical
+  compartment of a diameter of at least one third of the scanner's
+  transaxial FOV diameter and height at least one fourth of the scanner's
+  axial FOV length but never exceeding a height of 25cm. The starting
+  activity should be such that the SUV is at least 10, which always
+  accounts for the variable volume of the cylindrical phantom.  
 
-  - Can be C-11, N-13, Rb-82, Ga-68
+  - Can be C-11, N-13, Rb-82, or Ga-68
 
   - Can be 1 acquisition or several, no movement
 
@@ -210,7 +217,8 @@ Notes:
 - ACR PET phantom test with F-18 set for a 10mCi equivalent study. See
   <https://accreditationsupport.acr.org/support/solutions/articles/11000062800-phantom-testing-pet-revised-4-30-2026->
 
-- Optionally Ga-68 scan
+- Optionally Ga-68 scan (to assess prompt gamam effects in quantitative
+  data corrections
 
 ## Targeted scanners
 
