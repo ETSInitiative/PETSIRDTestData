@@ -55,29 +55,30 @@ Notes:
 #### Acquisition(s):
 
 - 2 radial and 2 axial locations away from the transaxial and axial FOV
-  center fixed to bed, each point source acquired in at least 2 bed
-  positions (step and shoot, in direction of the “head” of the patient),
-  such that in the first bed position, the point sources are roughly in
-  the middle of the scanner at the first bed position, and close to the
-  edge for the last bed position\
-  (only 1 position for neuro-scanners or other scanners without bed
-  movement)
+  center fixed to bed, each point source acquired in at least 1 bed
+  position (step and shoot, in direction of the “head” of the patient),
+  such that the point sources in the first axial location are roughly
+  in the axial FOV center in the first bed position, and close to the
+  edge for the second bed position, the point sources of the other
+  axial location are expected to be outside the scanner FOV at the
+  second bed position\ (only 1 bed position for neuro-scanners or
+  other scanners without bed movement)
 
-- Point sources should be placed at two radial offsets, ~3 cm and ~12 cm
+- Point sources should be placed at two radial offsets, ~1 cm and ~12 cm
   from center, combined with two axial offsets, ~0 cm (axial FOV center
-  of first bed position) and ~3 cm, with a 90 degree angular rotation
-  between the two radial positions at the different axial planes.
-  Concretely: (0, 3, z) and (0, 12, z) and (3, 0, z+3) and (12, 0, z+3),
-  where coordinates are given as (x,y,z) in mm with axes corresponding
-  to DICOM LPS for a HFS patient (see [Coordinate systems — 3D Slicer
-  documentation](https://slicer.readthedocs.io/en/latest/user_guide/coordinate_systems.html#anatomical-coordinate-system)),
-  and z corresponds to the middle of the scanner in the first bed
-  position.
+  of first bed position) and ~1 cm away from the axial FOV edge, with a
+  90 degree angular rotation between the two radial positions at the
+  different axial planes. Concretely: (0, 1, z) and (0, 12, z) and
+  (1, 0, 2z - 1) and (12, 0, 2z - 1), where the coordinates are given
+  as (x,y,z) in mm with axes corresponding to DICOM LPS for a HFS patient
+  (see [Coordinate systems — 3D Slicer documentation]
+  (https://slicer.readthedocs.io/en/latest/user_guide/coordinate_systems.html#anatomical-coordinate-system)),
+  and z corresponds to half the axial FOV of the scanner.
 
 - Recommended activity \* duration ~ 1 MBq \* 1 min (longer is fine).
 
 - For scanners that support Continuous Bed Motion (CBM): 1 CBM
-  acquisition for 10cm bed movement of the (0, 12, z) point source
+  acquisition for 4z/3 cm bed movement of the (0, 12, z) point source
 
 #### Notes:
 
