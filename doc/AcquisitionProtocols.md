@@ -78,7 +78,8 @@ Notes:
 - Recommended activity \* duration ~ 1 MBq \* 1 min (longer is fine).
 
 - For scanners that support Continuous Bed Motion (CBM): 1 CBM
-  acquisition for 4z/3 cm bed movement of the (0, 12, z) point source
+  acquisition along a maximum of 2z/3 cm bed movement distance
+  for the point source at (0, 1, z) and (0, 12, z) locations.
 
 #### Notes:
 
