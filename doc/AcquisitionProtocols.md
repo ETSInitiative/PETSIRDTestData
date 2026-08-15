@@ -281,6 +281,11 @@ files for one “acquisition”. This is vendor software version dependent.
 Please upload this data to a permanent store. In the following, we
 assume upload to Zenodo, but similar repositories are also acceptable.
 
+> [!WARNING]
+> Zenodo has a 50GB limit per record (although personal quota can be
+> used to increase this somewhat). This might be problematic for some
+> acquisitions.
+
 We would like the data on a permanent store so that we can use a Digital
 Object Identifier (DOI) to cite your data. Note that DOIs are intended
 to be permanent identifiers, so files uploaded to Zenodo cannot be
