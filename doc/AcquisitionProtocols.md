@@ -3,8 +3,8 @@
 ## Main contributors
 
 Kris Thielemans, Nicolas Karakatsanis, Alan Osys,
-Pawel Markiewicz, Glenn Wells, but based on discussions in meetings of
-the [ETSI Consortium](https://etsinitiative.org/etsi-consortium/)
+Pawel Markiewicz, Georg Schramm, Glenn Wells, but based on discussions
+in meetings of the [ETSI Consortium](https://etsinitiative.org/etsi-consortium/).
 
 ## Aim
 
