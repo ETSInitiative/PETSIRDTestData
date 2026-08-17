@@ -71,7 +71,7 @@ Notes:
       (see [Coordinate systems — 3D Slicer documentation](https://slicer.readthedocs.io/en/latest/user_guide/coordinate_systems.html#anatomical-coordinate-system))
       and $(0,0,0)$ is in the center of the scanner.
 
-- step-and-shoot bed movement (if supported) for $(10mm,-Y,0)$ point source, 
+- step-and-shoot bed movement (if supported) for $(10mm,-Y,0)$ point source,
   moving the bed in direction of the “head of the patient" (HFS) in at least 2 steps
   (more is better), with total horizontal translation minimum $L/5$, maximum $L/3$.
 
