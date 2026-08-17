@@ -59,21 +59,21 @@ Notes:
   - each acquisition should have the point source in a different position
 
   - at least 3 positions, recommended 4. Approximate positions:
-    $(0, -10, L/2 - 10)$, $(10,0,0)$, ideally $(-10, 0, L/3)$,
-    and $(10,-Y,0)$, where
+    $(0, -10mm, L * 0.45)$, $(\rho,0,0)$, $(10mm,-\rho,0)$,
+    and ideally $(-10mm, 0, L/3)$, where
 
     - $L$ is the axial FOV length
 
-    - $Y$ is 120mm (for small FOV scanners, use half the FOV radius)
+    - $\rho$ is 120mm (for small FOV scanners, use half the FOV radius)
 
-    - coordinates are given as $(x,y,z)$ in mm with axes
+    - coordinates are given as $(x,y,z)$ with axes
       corresponding to DICOM LPS for a HFS patient
       (see [Coordinate systems — 3D Slicer documentation](https://slicer.readthedocs.io/en/latest/user_guide/coordinate_systems.html#anatomical-coordinate-system))
       and $(0,0,0)$ is in the center of the scanner.
 
-- step-and-shoot bed movement (if supported) for last point source, moving the bed
-  in direction of the “head of the patient" (HFS) in at least 2 steps, with total
-  horizontal translation minimum $L/5$, maximum $L/3$.
+- step-and-shoot bed movement (if supported) for $(10mm,-Y,0)$ point source, 
+  moving the bed in direction of the “head of the patient" (HFS) in at least 2 steps
+  (more is better), with total horizontal translation minimum $L/5$, maximum $L/3$.
 
 - continuous bed movement (CBM) (if supported) for last point source over
   same range as the step-and-shoot (movement is can be either in reverse direction,
