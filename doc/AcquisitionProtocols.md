@@ -3,14 +3,21 @@
 ## Main contributors
 
 Kris Thielemans, Nicolas Karakatsanis, Alan Osys,
-Pawel Markiewicz, Glenn Wells, but based on discussions in meetings of
-the [ETSI Consortium](https://etsinitiative.org/etsi-consortium/)
+Pawel Markiewicz, Georg Schramm, Glenn Wells, but based on discussions
+in meetings of the [ETSI Consortium](https://etsinitiative.org/etsi-consortium/).
 
 ## Aim
 
 This document describes protocols for acquiring and processing of
 phantom data that can be used to test if PET list-mode (and associated
-calibration) data has been converted correctly to PETSIRD.
+calibration) convertors to PETSIRD are correct. This data is *not*
+intended for
+
+- QA/QC of your scanner (we need only 1 data-set per
+  scanner model/software version).
+
+- checking your reconstruction chain (tests avoid reconstruction
+  as much as possible).
 
 The current description is intended to be helpful but not a SOP. Our
 intention is to prioritise ease of gathering data and experience,
@@ -26,7 +33,7 @@ Notes:
   relaxed later).
 
 - All data should include list-mode data, calibration/normalisation
-  files, PET vendor reconstructions and CT (or MR). Raw data should be
+  files, PET vendor reconstructions and CT (or MR) images. Raw data should be
   in vendor format. All images should be in DICOM format. See the last
   section for directory structure, upload details etc.
 
@@ -47,47 +54,49 @@ Notes:
 
 #### Acquisition(s):
 
-- 2 radial and 2 axial locations away from the transaxial and axial FOV
-  center fixed to bed, each point source acquired in at least 2 bed
-  positions (step and shoot, in direction of the “head” of the patient),
-  such that in the first bed position, the point sources are roughly in
-  the middle of the scanner at the first bed position, and close to the
-  edge for the last bed position\
-  (only 1 position for neuro-scanners or other scanners without bed
-  movement)
+- single point source acquisitions with stationary bed:
 
-- Point sources should be placed at two radial offsets, ~3 cm and ~12 cm
-  from center, combined with two axial offsets, ~0 cm (axial FOV center
-  of first bed position) and ~3 cm, with a 90 degree angular rotation
-  between the two radial positions at the different axial planes.
-  Concretely: (0, 3, z) and (0, 12, z) and (3, 0, z+3) and (12, 0, z+3),
-  where coordinates are given as (x,y,z) in mm with axes corresponding
-  to DICOM LPS for a HFS patient (see [Coordinate systems — 3D Slicer
-  documentation](https://slicer.readthedocs.io/en/latest/user_guide/coordinate_systems.html#anatomical-coordinate-system)),
-  and z corresponds to the middle of the scanner in the first bed
-  position.
+  - each acquisition should have the point source in a different position
 
-- Recommended activity \* duration ~ 1 MBq \* 1 min (longer is fine).
+  - at least 3 positions, recommended 4. Approximate positions:
+    $(0, -10mm, L * 0.45)$, $(\rho,0,0)$, $(10mm,-\rho,0)$,
+    and ideally $(-10mm, 0, L/3)$, where
 
-- For scanners that support Continuous Bed Motion (CBM): 1 CBM
-  acquisition for 10cm bed movement of the (0, 12, z) point source
+    - $L$ is the axial FOV length
+
+    - $\rho$ is 120mm (for small FOV scanners, use half the FOV radius)
+
+    - coordinates are given as $(x,y,z)$ with axes
+      corresponding to DICOM LPS for a HFS patient
+      (see [Coordinate systems — 3D Slicer documentation](https://slicer.readthedocs.io/en/latest/user_guide/coordinate_systems.html#anatomical-coordinate-system))
+      and $(0,0,0)$ is in the center of the scanner.
+
+- step-and-shoot bed movement (if supported) for $(10mm,-Y,0)$ point source, 
+  moving the bed in direction of the “head of the patient" (HFS) in at least 2 steps
+  (more is better), with total horizontal translation minimum $L/5$, maximum $L/3$.
+
+- continuous bed movement (CBM) (if supported) for last point source over
+  same range as the step-and-shoot (movement is can be either in reverse direction,
+  or restarting from original position, but needs to be documented).
+  We suggest a CBM speed that allows to cover the scanner AFOV in 2min, but
+  slower is fine.
+
+- Recommended activity \* duration ~ 1 MBq \* 1 min for each bed position (longer
+  is fine).
 
 #### Notes:
 
-- 1 source per acquisition
+- Given locations are approximate. There is no need to be accurate in positioning.
 
-  - Avoids issues with randoms, background, debugging
+- 1 source per acquisition (**not** multiple sources in 1 acquisition).
+  This simplifies debugging, voids issues with randoms and background,
+  and makes it easier to check activity.
 
-  - Makes it easier to check activity
-
-- Locations are approximate
-
-- A CT (or MR) is needed for every point source position (a single CT/MR
-  covering all PET bed positions is fine) as this is used for
-  verification of location.
+- For each acquisition, a CT (or MR) is required. For acquisitions with
+  multiple bed positions, we prefer a single CT (or MR) covering all PET bed positions.
 
 - Na-22 point source or Capillary tube with “bead” of activity are both
-  acceptable
+  acceptable.
 
 - Avoid issues with scatter and attenuation, so “holder” should be
   minimal.
@@ -98,7 +107,7 @@ Notes:
 #### How to test:
 
 - (geometric) backprojection, find centre-of-mass, check with known
-  location determined from vendor reconstruction
+  location determined from vendor reconstruction.
 
 ### RANDOMS: Hot source outside axial FOV
 
@@ -119,20 +128,27 @@ Notes:
 #### How to test:
 
 - Ideally non-reconstruction test: histogram prompt data, compute
-  randoms estimate, should be equal within statistical limits
+  randoms estimate, should be equal within statistical limits.
 
 ### CYLINDER_DECAY: Uniform cylinder (fast decaying radionuclide)
 
 #### Aims:
 
-- Testing dead-time information and randoms
+- Testing dead-time information (including pile-up) and randoms
 
 #### Acquisition(s):
 
 - Cylinder roughly in center of scanner with high-activity decaying over
-  several half-lives
+  several half-lives. A cylindrical fillable phantom provided by the
+  scanner vendor can be used. If such a phantom is not available, then
+  it is recommended any phantom with a uniformly filled cylindrical
+  compartment of a diameter of at least one third of the scanner's
+  transaxial FOV diameter and height at least one fourth of the scanner's
+  axial FOV length but never exceeding a height of 25cm. The starting
+  activity should be such that the SUV is at least 10, which always
+  accounts for the variable volume of the cylindrical phantom.
 
-  - Can be C-11, N-13, Rb-82, Ga-68
+  - Can be C-11, N-13, Rb-82, or Ga-68
 
   - Can be 1 acquisition or several, no movement
 
@@ -202,7 +218,8 @@ Notes:
 - ACR PET phantom test with F-18 set for a 10mCi equivalent study. See
   <https://accreditationsupport.acr.org/support/solutions/articles/11000062800-phantom-testing-pet-revised-4-30-2026->
 
-- Optionally Ga-68 scan
+- Optionally Ga-68 scan (to assess prompt gamam effects in quantitative
+  data corrections
 
 ## Targeted scanners
 
@@ -246,7 +263,7 @@ files for one “acquisition”. This is vendor software version dependent.
     List-mode data as exported from the scanner console
 
   - AC/\
-    CTAC or MRAC (in DICOM)
+    attenuation CT or attenuation MR dicom series
 
   - vendor_recon/\
     Images reconstructed with vendor software (DICOM) (all corrections
@@ -264,6 +281,11 @@ files for one “acquisition”. This is vendor software version dependent.
 Please upload this data to a permanent store. In the following, we
 assume upload to Zenodo, but similar repositories are also acceptable.
 
+> [!WARNING]
+> Zenodo has a 50GB limit per record (although personal quota can be
+> used to increase this somewhat). This might be problematic for some
+> acquisitions.
+
 We would like the data on a permanent store so that we can use a Digital
 Object Identifier (DOI) to cite your data. Note that DOIs are intended
 to be permanent identifiers, so files uploaded to Zenodo cannot be
@@ -273,11 +295,11 @@ are not familiar with Zenodo uploading, it is useful to try the sandpit
 site before creating a permanent public record.
 
 > [!TIP]
-> [Zenodo sandpit server](https://sandbox.zenodo.org/). If you wish to
->  login to the Zenodo sandpit site using Orcid credentials, we recommend
->  first logging in to the main [Zenodo](https://zenodo.org/) site and
+> If you wish to login to the [Zenodo sandbox site](https://sandbox.zenodo.org)
+> using Orcid credentials, we recommend
+> first logging in to the [main Zenodo site](https://zenodo.org) and
 > then going to the Zenodo sandpit site, otherwise the system can get
->  confused and try to validate you using an Orcid sandpit.
+> confused and try to validate you using an Orcid sandpit.
 
 For more information, see the [Zenodo upload
 instructions](https://help.zenodo.org/docs/deposit/create-new-upload/).
