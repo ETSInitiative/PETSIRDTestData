@@ -1,4 +1,20 @@
-# Shell scripts should have LF
-*.bashrc text eol=lf
-*.sh text eol=lf
-*.csh text eol=lf
+# currently empty attributes (using pre-commit)
+[attr]cppfiles
+[attr]cfiles
+[attr]pyfiles
+*.cpp  cppfiles
+*.cxx  cppfiles
+*.h  cppfiles
+*.inl  cppfiles
+*.txx  cppfiles
+*.c    cfiles
+*.py   pyfiles
+*.gz     -text -diff
+*.nii     -text -diff
+*.sh    eol=lf
+*.jpg   -text -diff
+*.png   -text -diff
+*.gif   -text -diff
+*.pdf   -text -diff
+*.eps   -text -diff
+*.stl   -text -diff

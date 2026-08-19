@@ -64,14 +64,15 @@ Notes:
 
     - $L$ is the axial FOV length in mm
 
-    - $\rho$ is 120mm (for small FOV scanners, use the integer mm radial offset closest to the edge of the transaxial FOV )
+    - $\rho$ is 120mm (for small FOV scanners, use the integer mm radial offset
+      closest to the edge of the transaxial FOV )
 
     - coordinates are given as $(x,y,z)$ with axes
       corresponding to DICOM LPS for a HFS patient
       (see [Coordinate systems — 3D Slicer documentation](https://slicer.readthedocs.io/en/latest/user_guide/coordinate_systems.html#anatomical-coordinate-system))
       and $(0,0,0)$ is in the center of the scanner.
 
-- step-and-shoot bed movement (if supported) for $(\rho, 0, 0)$ point source, 
+- step-and-shoot bed movement (if supported) for $(\rho, 0, 0)$ point source,
   moving the bed in direction of the “head of the patient" (HFS) in at least 2 steps
   (more is better), with total horizontal translation minimum $L/5$, maximum $L/3$.
 
@@ -101,13 +102,15 @@ Notes:
 - Avoid issues with scatter and attenuation, so “holder” should be
   minimal.
 
-- Nicolas Karakatsanis can provide the STL file of a 3D printed custom plastic phantom with holes
-  at $(x,0,\sigma)$ and $(0,-x,\sigma)$ positions where $x$ is a variable integer from 0 to 12 cm that can be used for
-  mounting capillary tubes parallel to the scanner z axis.
-  $\sigma$ can be any single axial position from 0 to $L$ cm, i.e. within the scanner axial FOV.
-  Each capillary tube may carry a point sources at its tip outside the hole.
-  The phantom can be mounted to an object (e.g. the scanner bed) and translated at any distance $\sigma$ in cm
-  parallel to the z coordinate (axial direction) of a ring scanner.
+- See [PointSourceHolder](PointSourceHolder/) for an STL file for a 3D printed
+  custom phantom with holes at $(x,0,\sigma)$ and $(0,-x,\sigma)$ positions where
+  $x$ is a variable integer from 0 to 12 cm that can be used for mounting capillary
+  tubes parallel to the scanner axis.
+  $\sigma$ can be any single axial position from 0 to $L$ cm, i.e. within the
+  scanner axial FOV. Each capillary tube may carry a point source at its tip
+  outside the hole. The phantom can be mounted to an object (e.g. the scanner bed)
+  and translated at any distance $\sigma$ in cm parallel to the z coordinate
+  (axial direction) of the scanner.
 
 #### How to test:
 
