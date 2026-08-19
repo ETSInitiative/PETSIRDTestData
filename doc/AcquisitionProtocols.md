@@ -59,23 +59,23 @@ Notes:
   - each acquisition should have the point source in a different position
 
   - at least 3 positions, recommended 4. Approximate positions:
-    $(0, -10mm, L * 0.45)$, $(\rho,0,0)$, $(10mm,-\rho,0)$,
-    and ideally $(-10mm, 0, L/3)$, where
+    $(0, -10mm, L * 0.45)$, $(\rho, 0, 0)$, $(10mm, 0, 0)$,
+    and ideally $(\rho, 0, L * 0.45)$, where
 
-    - $L$ is the axial FOV length
+    - $L$ is the axial FOV length in mm
 
-    - $\rho$ is 120mm (for small FOV scanners, use half the FOV radius)
+    - $\rho$ is 120mm (for small FOV scanners, use the integer mm radial offset closest to the edge of the transaxial FOV )
 
     - coordinates are given as $(x,y,z)$ with axes
       corresponding to DICOM LPS for a HFS patient
       (see [Coordinate systems — 3D Slicer documentation](https://slicer.readthedocs.io/en/latest/user_guide/coordinate_systems.html#anatomical-coordinate-system))
       and $(0,0,0)$ is in the center of the scanner.
 
-- step-and-shoot bed movement (if supported) for $(10mm,-Y,0)$ point source, 
+- step-and-shoot bed movement (if supported) for $(\rho, 0, 0)$ point source, 
   moving the bed in direction of the “head of the patient" (HFS) in at least 2 steps
   (more is better), with total horizontal translation minimum $L/5$, maximum $L/3$.
 
-- continuous bed movement (CBM) (if supported) for last point source over
+- continuous bed movement (CBM) (if supported) for $(\rho, 0, 0)$ point source over
   same range as the step-and-shoot (movement is can be either in reverse direction,
   or restarting from original position, but needs to be documented).
   We suggest a CBM speed that allows to cover the scanner AFOV in 2min, but
@@ -101,8 +101,13 @@ Notes:
 - Avoid issues with scatter and attenuation, so “holder” should be
   minimal.
 
-- Nicolas Karakatsanis has 3d printed custom phantom that can be used
-  for positioning (12 cm maximum radial range).
+- Nicolas Karakatsanis can provide the STL file of a 3D printed custom plastic phantom with holes
+  at $(x,0,\sigma)$ and $(0,-x,\sigma)$ positions where $x$ is a variable integer from 0 to 12 cm that can be used for
+  mounting capillary tubes parallel to the scanner z axis.
+  $\sigma$ can be any single axial position from 0 to $L$ cm, i.e. within the scanner axial FOV.
+  Each capillary tube may carry a point sources at its tip outside the hole.
+  The phantom can be mounted to an object (e.g. the scanner bed) and translated at any distance $\sigma$ in cm
+  parallel to the z coordinate (axial direction) of a ring scanner.
 
 #### How to test:
 
