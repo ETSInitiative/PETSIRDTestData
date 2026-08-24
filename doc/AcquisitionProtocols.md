@@ -85,8 +85,7 @@ Notes:
 - Recommended activity \* duration ~ 1 MBq \* 1 min for each bed position (longer
   is fine).
 
-![Alt text](./pet_point_sources.svg)
-<img src="./pet_point_sources.svg">
+![point source positions](./pet_point_sources.svg)
 
 #### Notes:
 
