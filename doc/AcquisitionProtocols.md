@@ -85,6 +85,8 @@ Notes:
 - Recommended activity \* duration ~ 1 MBq \* 1 min for each bed position (longer
   is fine).
 
+![point source positions](./pet_point_sources.svg)
+
 #### Notes:
 
 - Given locations are approximate. There is no need to be accurate in positioning.
